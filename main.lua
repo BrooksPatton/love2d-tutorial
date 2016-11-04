@@ -1,15 +1,4 @@
 function love.load()
-  function reset()
-    birdY = 200
-    birdYSpeed = 0
-    pipe1X = playingAreaWidth
-    pipe1SpaceY = newPipeSpaceY()
-    pipe2X = playingAreaWidth + ((playingAreaWidth + pipeWidth) / 2)
-    pipe2SpaceY = newPipeSpaceY()
-    score = 0
-    upcomingPipe = 1
-  end
-
   playingAreaWidth = 300
   playingAreaHeight = 388
   pipeSpaceHeight = 100
@@ -21,7 +10,25 @@ function love.load()
   reset()
 end
 
+function reset()
+  birdY = 200
+  birdYSpeed = 0
+  pipe1X = playingAreaWidth
+  pipe1SpaceY = newPipeSpaceY()
+  pipe2X = playingAreaWidth + ((playingAreaWidth + pipeWidth) / 2)
+  pipe2SpaceY = newPipeSpaceY()
+  score = 0
+  upcomingPipe = 1
+end
+
 function love.update(dt)
+  local function updateScoreAndClosestPipe(thisPipe, pipeX, otherPipe)
+    if upcomingPipe == thisPipe and (birdX > (pipeX + pipeWidth)) then
+      score = score + 1
+      upcomingPipe = otherPipe
+    end
+  end
+
   birdYSpeed = birdYSpeed + (516 * dt)
   birdY = birdY + (birdYSpeed * dt)
 
@@ -30,14 +37,6 @@ function love.update(dt)
 
   if isBirdCollidingWithPipe(pipe1X, pipe1SpaceY) or isBirdCollidingWithPipe(pipe2X, pipe2SpaceY) or birdY > playingAreaHeight then
     reset()
-  end
-
-
-  local function updateScoreAndClosestPipe(thisPipe, pipeX, otherPipe)
-    if upcomingPipe == thisPipe and (birdX > (pipeX + pipeWidth)) then
-      score = score + 1
-      upcomingPipe = otherPipe
-    end
   end
 
   updateScoreAndClosestPipe(1, pipe1X, 2)
