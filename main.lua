@@ -11,6 +11,8 @@ function love.load()
   pipe1X = playingAreaWidth
   pipe1SpaceY = newPipeSpaceY()
 
+  score = 0
+
   pipe2X = playingAreaWidth + ((playingAreaWidth + pipeWidth) / 2)
   pipe2SpaceY = newPipeSpaceY()
 end
@@ -36,6 +38,9 @@ function love.draw()
 
   drawPipe(pipe1X, pipe1SpaceY)
   drawPipe(pipe2X, pipe2SpaceY)
+
+  love.graphics.setColor(255, 255, 255)
+  love.graphics.print(score, 15, 15)
 end
 
 function love.keypressed(key)
