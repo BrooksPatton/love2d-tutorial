@@ -15,6 +15,8 @@ function love.load()
 
   pipe2X = playingAreaWidth + ((playingAreaWidth + pipeWidth) / 2)
   pipe2SpaceY = newPipeSpaceY()
+
+  upcomingPipe = 1
 end
 
 function love.update(dt)
@@ -26,6 +28,16 @@ function love.update(dt)
 
   if isBirdCollidingWithPipe(pipe1X, pipe1SpaceY) or isBirdCollidingWithPipe(pipe2X, pipe2SpaceY) or birdY > playingAreaHeight then
     love.load()
+  end
+
+  if upcomingPipe == 1 and (birdX > (pipe1X + pipeWidth)) then
+    score = score + 1
+    upcomingPipe = 2
+  end
+
+  if upcomingPipe == 2 and (birdX > (pipe2X + pipeWidth)) then
+    score = score + 1
+    upcomingPipe = 1
   end
 end
 
