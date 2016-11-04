@@ -7,6 +7,7 @@ function love.load()
   pipeWidth = 54
   birdX = 62
   birdWidth = 30
+  birdHeight = 25
 
   resetPipe()
 end
@@ -21,7 +22,7 @@ function love.update(dt)
     resetPipe()
   end
 
-  if birdX < (pipeX + pipeWidth) and (birdX + birdWidth) > pipeX and birdY < pipeSpaceY then
+  if birdX < (pipeX + pipeWidth) and (birdX + birdWidth) > pipeX and (birdY < pipeSpaceY and (birdY < pipeSpaceY) or (birdY + birdHeight) > (pipeSpaceY + pipeSpaceHeight)) then
     love.load()
   end
 end
@@ -31,7 +32,7 @@ function love.draw()
   love.graphics.rectangle('fill', 0, 0, playingAreaWidth, playingAreaHeight)
 
   love.graphics.setColor(224, 214, 68)
-  love.graphics.rectangle('fill', birdX, birdY, birdWidth, 25)
+  love.graphics.rectangle('fill', birdX, birdY, birdWidth, birdHeight)
 
   love.graphics.setColor(94, 201, 72)
   love.graphics.rectangle('fill', pipeX, 0, pipeWidth, pipeSpaceY)
