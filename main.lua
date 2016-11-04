@@ -8,23 +8,19 @@ function love.load()
   birdX = 62
   birdWidth = 30
   birdHeight = 25
+  pipe1X = 100
+  pipe1SpaceY = newPipeSpaceY()
 
-  resetPipe()
+  pipe2X = 200
+  pipe2SpaceY = newPipeSpaceY()
 end
 
 function love.update(dt)
   birdYSpeed = birdYSpeed + (516 * dt)
   birdY = birdY + (birdYSpeed * dt)
 
-  pipeX = pipeX - (60 * dt)
-
-  if(pipeX + pipeWidth) < 0 then
-    resetPipe()
-  end
-
-  if birdX < (pipeX + pipeWidth) and (birdX + birdWidth) > pipeX and (birdY < pipeSpaceY and (birdY < pipeSpaceY) or (birdY + birdHeight) > (pipeSpaceY + pipeSpaceHeight)) then
-    love.load()
-  end
+  pipe1X, pipe1SpaceY = movePipe(pipe1X, pipe1SpaceY, dt)
+  pipe2X, pipe2SpaceY = movePipe(pipe2X, pipe2SpaceY, dt)
 end
 
 function love.draw()
@@ -34,6 +30,24 @@ function love.draw()
   love.graphics.setColor(224, 214, 68)
   love.graphics.rectangle('fill', birdX, birdY, birdWidth, birdHeight)
 
+  drawPipe(pipe1X, pipe1SpaceY)
+  drawPipe(pipe2X, pipe2SpaceY)
+end
+
+function love.keypressed(key)
+  if birdY >= 0 then
+    birdYSpeed = -265
+  end
+end
+
+function newPipeSpaceY()
+  local pipeSpaceYMin = 54
+  local pipeSpaceY = love.math.random(pipeSpaceYMin, playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin)
+
+  return pipeSpaceY
+end
+
+function drawPipe(pipeX, pipeSpaceY)
   love.graphics.setColor(94, 201, 72)
   love.graphics.rectangle('fill', pipeX, 0, pipeWidth, pipeSpaceY)
 
@@ -41,15 +55,13 @@ function love.draw()
   love.graphics.rectangle('fill', pipeX, pipeSpaceY + pipeSpaceHeight, pipeWidth, playingAreaHeight - pipeSpaceY - pipeSpaceHeight)
 end
 
-function love.keypressed(key)
-  if birdY >= 0 then
-    birdYSpeed = -265
+function movePipe(pipeX, pipeSpaceY, dt)
+  pipeX = pipeX - (60 * dt)
+
+  if(pipeX + pipeWidth) < 0 then
+    pipeX = playingAreaWidth
+    pipeSpaceY = newPipeSpaceY()
   end
 
-end
-
-function resetPipe()
-  local pipeSpaceYMin = 54
-  pipeSpaceY = love.math.random(0, playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin)
-  pipeX = playingAreaWidth
+  return pipeX, pipeSpaceY
 end
