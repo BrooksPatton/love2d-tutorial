@@ -1,28 +1,7 @@
-function love.load()
-  love.graphics.setColor(100, 200, 255)
-  pirate = love.graphics.newImage("Pirate.png")
-  hellox = 300
-  helloy = 300
-end
-
 function love.draw()
-  love.graphics.draw(pirate, hellox, helloy)
-end
+  love.graphics.setColor(35, 92, 118)
+  love.graphics.rectangle('fill', 0, 0, 300, 388)
 
-function love.update(dt)
-  if(love.keyboard.isDown("up")) then
-    helloy = helloy - 100 * dt
-  end
-
-  if(love.keyboard.isDown("down")) then
-    helloy = helloy + 100 * dt
-  end
-
-  if(love.keyboard.isDown("right")) then
-    hellox = hellox + 100 * dt
-  end
-
-  if(love.keyboard.isDown("left")) then
-    hellox = hellox - 100 * dt
-  end
+  love.graphics.setColor(224, 214, 68)
+  love.graphics.rectangle('fill', 62, 200, 30, 25)
 end
