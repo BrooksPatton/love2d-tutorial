@@ -4,9 +4,9 @@ function love.load()
   playingAreaWidth = 300
   playingAreaHeight = 388
   pipeSpaceHeight = 100
-  pipeSpaceYMin = 54
-  pipeSpaceY = love.math.random(0, playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin)
-  pipeX = playingAreaWidth
+  pipeWidth = 54
+
+  resetPipe()
 end
 
 function love.update(dt)
@@ -14,6 +14,10 @@ function love.update(dt)
   birdY = birdY + (birdYSpeed * dt)
 
   pipeX = pipeX - (60 * dt)
+
+  if(pipeX + pipeWidth) < 0 then
+    resetPipe()
+  end
 end
 
 function love.draw()
@@ -22,8 +26,6 @@ function love.draw()
 
   love.graphics.setColor(224, 214, 68)
   love.graphics.rectangle('fill', 62, birdY, 30, 25)
-
-  local pipeWidth = 54
 
   love.graphics.setColor(94, 201, 72)
   love.graphics.rectangle('fill', pipeX, 0, pipeWidth, pipeSpaceY)
@@ -37,4 +39,10 @@ function love.keypressed(key)
     birdYSpeed = -265
   end
 
+end
+
+function resetPipe()
+  local pipeSpaceYMin = 54
+  pipeSpaceY = love.math.random(0, playingAreaHeight - pipeSpaceHeight - pipeSpaceYMin)
+  pipeX = playingAreaWidth
 end
