@@ -8,10 +8,10 @@ function love.load()
   birdX = 62
   birdWidth = 30
   birdHeight = 25
-  pipe1X = 100
+  pipe1X = playingAreaWidth
   pipe1SpaceY = newPipeSpaceY()
 
-  pipe2X = 200
+  pipe2X = playingAreaWidth + ((playingAreaWidth + pipeWidth) / 2)
   pipe2SpaceY = newPipeSpaceY()
 end
 
