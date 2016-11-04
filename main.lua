@@ -22,7 +22,7 @@ function love.update(dt)
   pipe1X, pipe1SpaceY = movePipe(pipe1X, pipe1SpaceY, dt)
   pipe2X, pipe2SpaceY = movePipe(pipe2X, pipe2SpaceY, dt)
 
-  if isBirdCollidingWithPipe(pipe1X, pipe1SpaceY) or isBirdCollidingWithPipe(pipe2X, pipe2SpaceY) then
+  if isBirdCollidingWithPipe(pipe1X, pipe1SpaceY) or isBirdCollidingWithPipe(pipe2X, pipe2SpaceY) or birdY > playingAreaHeight then
     love.load()
   end
 end
