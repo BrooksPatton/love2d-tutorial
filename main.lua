@@ -17,8 +17,15 @@ function love.draw()
   love.graphics.setColor(224, 214, 68)
   love.graphics.rectangle('fill', 62, birdY, 30, 25)
 
+  local pipeWidth = 54
+  local pipeSpaceY = 150
+  local pipeSpaceHeight = 100
+
   love.graphics.setColor(94, 201, 72)
-  love.graphics.rectangle('fill', playingAreaWidth, 0, 54, playingAreaHeight)
+  love.graphics.rectangle('fill', playingAreaWidth, 0, pipeWidth, pipeSpaceY)
+
+  love.graphics.setColor(94, 201, 72)
+  love.graphics.rectangle('fill', playingAreaWidth, pipeSpaceY + pipeSpaceHeight, pipeWidth, playingAreaHeight - pipeSpaceY - pipeSpaceHeight)
 end
 
 function love.keypressed(key)
